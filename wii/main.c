@@ -34,7 +34,7 @@ int main(int argc, char **argv)
 	/* the rest is to get gcc to make a realistic switch statement */
       }
       else
-	return 0;
+	exit(0);
     case 12:
     case 8:
       count=25;
@@ -44,4 +44,6 @@ int main(int argc, char **argv)
       NEXT;
     }
   }
+	printf("Hello, world!\n");
+    return 0;
 }
