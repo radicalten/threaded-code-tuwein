@@ -9,7 +9,7 @@ export TARGET 	:= $(notdir $(CURDIR))
 BUILD 			:= build
 SRCDIR			:= wii
 C_SOURCES 		:= $(foreach dir,$(SRCDIR),$(notdir $(wildcard $(dir)/*.c)))
-export INCLUDES := -I/opt/devkitpro/portlibs/wii/include -I/opt/devkitpro/portlibs/ppc/include
+export INCLUDES := -I$(DEVKITPRO)/libogc/include -I/opt/devkitpro/portlibs/wii/include -I/opt/devkitpro/portlibs/ppc/include
 
 C_OBJECTS 		:= $(C_SOURCES:.c=.o)
 export OBJECTS 	:= $(C_OBJECTS) 
