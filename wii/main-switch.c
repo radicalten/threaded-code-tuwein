@@ -140,6 +140,14 @@ int main(int argc, char **argv) {
 // 15.72 fps 0.0001s or .0000729 cycles
 
 
+// https://www.complang.tuwien.ac.at/forth/threading/
+/*
+You can compute the cycles per dispatch as
+cycles = measured user time * clock frequency in MHz / 1000
+*/
+
+
+// https://github.com/devkitPro/libogc/blob/master/gc/ogc/lwp_watchdog.h
 /*
 #ifndef __LWP_WATCHDOG_H__
 #define __LWP_WATCHDOG_H__
