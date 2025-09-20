@@ -103,7 +103,6 @@ if (count % 10000000 == 0){	  // checks every 10M loop iterations using moduluo 
   }
   else
     exit(0);
-}
   
 
 	while(1) {
