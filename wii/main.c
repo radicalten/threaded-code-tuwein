@@ -93,8 +93,12 @@ int main(int argc, char **argv) {
 	NEXT;
 	/* the rest is to get gcc to make a realistic switch statement */
       }
-      else
+      else {
+	end = clock();
+    cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
+    printf("took %f seconds to execute (CPU time)\n", cpu_time_used);
 	exit(0);
+	  }
     case 12:
     case 8:
       count=25;
@@ -105,9 +109,7 @@ int main(int argc, char **argv) {
     }
   }
 
-	end = clock();
-    cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
-    printf("took %f seconds to execute (CPU time)\n", cpu_time_used);
+	
 
 	while(1) {
 
