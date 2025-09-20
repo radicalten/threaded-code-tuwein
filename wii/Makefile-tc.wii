@@ -26,7 +26,7 @@ CFLAGS 			+= $(FLAGS) $(INCLUDES)
 export LDFLAGS 	+= $(CFLAGS) $(MACHDEP) \
 -Wl,-Map,$(notdir $@).map \
 -L$(DEVKITPRO)/libogc/lib/wii \
--lwiiuse -lbte -lfat -logc -lm
+-lfat -lwiiuse -lbte -logc -lm
 
 all: $(TARGET).dol
 $(TARGET).dol: $(TARGET).elf
