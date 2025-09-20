@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <gccore.h>
 #include <wiiuse/wpad.h>
+#include <time.h>
 
 #define NEXT break
 #define guard(n) asm("#" #n)
@@ -57,7 +58,13 @@ int main(int argc, char **argv) {
 	printf("\x1b[2;0H");
 
 
-	printf("Hello World!\n");
+	printf("Start Clock\n");
+	
+	clock_t start, end;
+    double cpu_time_used;
+    start = clock();
+
+//Begin v2 switch.c	
   static int prog[] = {0,1,0,2,0,3,0,4,0,5};
   int *ip=prog;
   int    count = 100000000;
@@ -97,8 +104,11 @@ int main(int argc, char **argv) {
       NEXT;
     }
   }
-printf("Hello World!\n");
-  
+
+	end = clock();
+    cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
+    printf("took %f seconds to execute (CPU time)\n", cpu_time_used);
+
 	while(1) {
 
 		// Call WPAD_ScanPads each loop, this reads the latest controller states
