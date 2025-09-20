@@ -1,7 +1,7 @@
 #include <stdlib.h>
 
 #define NEXT break
-#define guard(n) asm("#" #n)
+#define guard(n) asm volatile ("" ::: "memory")
 
 int main(int argc, char **argv)
 {
