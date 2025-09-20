@@ -43,13 +43,10 @@ void next5()
 void loop()
 {
   static int count=100000000;
+	
 	if (count==100000000){ 
 		u64 start_time_slow = gettick();
 	}
-  if (count<=0)
-    exit(0);
-  count--;
-  ip=prog;
 	if (count2 % 10000000 == 0){	  // checks every 10M loop iterations using moduluo op
 	u64 end_time_slow = gettick();   // Get end time in ticks
 	u64 diff_ticks_slow = diff_ticks(start_time_slow, end_time_slow);
@@ -59,6 +56,12 @@ void loop()
 	printf("cycles: %llu \n\n", num1_ticks);	
  	u64 start_time_slow = gettick();
 	}	
+	
+  if (count<=0)
+    exit(0);
+  count--;
+  ip=prog;
+	
 }
 
 Inst prog[] = {next1,next2,next1,next3,next1,next4,next1,next5,next1,loop};
