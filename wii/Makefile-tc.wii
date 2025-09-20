@@ -21,6 +21,7 @@ ELF2DOL   		:= elf2dol
 BIN2O 			:= bin2o
 
 FLAGS    		+= -O3 -Wall -Wextra -ffast-math -fpermissive
+DEFINES  		+=
 CFLAGS 			+= $(FLAGS) $(INCLUDES) 
 export LDFLAGS 	+= $(CFLAGS) $(MACHDEP) \
 -Wl,-Map,$(notdir $@).map \
