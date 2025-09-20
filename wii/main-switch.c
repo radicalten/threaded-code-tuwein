@@ -62,7 +62,9 @@ int main(int argc, char **argv) {
 	
 	clock_t start, end;
     double cpu_time_used;
-    start = clock();
+    //start = clock();
+	start = 0;
+	end = 0;
 
 //Begin v2 switch.c	
   static int prog[] = {0,1,0,2,0,3,0,4,0,5};
@@ -89,18 +91,15 @@ int main(int argc, char **argv) {
     case 5:
       if (count>0) {
 	count--;
-	ip=prog;	
-	if(end == 0){	  
+	ip=prog;
 	end = clock();
-	}
-	cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
-	if(end != 0){	 
+	cpu_time_used = ((double) (end - start))
+	//cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC; 
 	printf("start %.9f \n", start);
 	printf("end %.9f \n", end);	
 	printf("start-end %.9f \n", start-end);		
 	//printf("took %.9f seconds to execute (CPU time)\n", cpu_time_used); // cycles = measured user time * clock frequency in MHz / 1000
 	//printf("total cycles %.9f is time * clockfrequency div 1000Mhz \n", cpu_time_used*.729);
-	}
 	NEXT;
 	/* the rest is to get gcc to make a realistic switch statement */
       }
