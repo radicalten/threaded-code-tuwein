@@ -14,10 +14,10 @@ jobs:
     - name: Compile
       run: |
         cd wii
-        make -f Makefile.wii
+        make -f Makefile-tc.wii
     - name: Upload
       uses: actions/upload-artifact@v4
       with:
-        name: dkppc-min
+        name: threaded-code
         path: |
           ./wii/*.dol
