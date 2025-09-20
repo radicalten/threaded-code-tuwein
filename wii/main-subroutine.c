@@ -139,6 +139,14 @@ void loop()
 // 15.72 fps 0.0001s or .0000729 cycles
 //all tests done with JIT ARM64, HLE audio, no audio backend 
 
+// Update main-subroutine.c #154
+// Execution took: 3819 miliseconds (ms)
+// cycles: 2784708996000
+// Execution took: 4595 miliseconds (ms)
+// cycles: 3349987944000
+// Execution took: 4789 miliseconds (ms)
+// cycles: 3491891556000
+
 // Update main-repl-switch.c #146
 // Execution took: 7637 miliseconds (ms)
 // cycles: 5371188024000
@@ -163,6 +171,9 @@ void loop()
 // Execution took: 16777 miliseconds (ms)
 // cycles: 12230582664000
 
+//if (count % 10000000 == 0){ main-subroutine.c
+//(2784708996000/10000000)/3819 = 72.917 cycles per dispatch (lower is better)
+//(3491891556000/10000000)/4789 = 72.914 cycles per dispatch
 
 //if (count % 10000000 == 0){ main-repl-switch.c
 //(5371188024000/10000000)/7637 = 70.33 cycles per dispatch (lower is better)
