@@ -40,7 +40,6 @@ void run_benchmark() {
                     ip = prog;
                     NEXT;
                 } else {
-                    // Instead of exit(), we just return from the function
                     return;
                 }
             /* The rest is to get gcc to make a realistic switch statement */
@@ -57,12 +56,28 @@ void run_benchmark() {
 
 // Main function for the Wii application
 int main(int argc, char **argv) {
-    // 1. Initialize video and console
+    // 1. Initialize hardware subsystems
     VIDEO_Init();
     WPAD_Init();
+    
+    // 2. Configure the video mode
     rmode = VIDEO_GetPreferredMode(NULL);
     xfb = MEM_K0_TO_K1(SYS_AllocateFramebuffer(rmode));
+
+    // ------------------- THE FIX IS HERE -------------------
+    // Initialize the GX graphics subsystem. This MUST be done
+    // before calling console_init(), which uses GX to draw text.
+    GX_Init(xfb, rmode);
+    // -------------------------------------------------------
+
+    // Setup a black background
+    GXColor background = {0, 0, 0, 0xff};
+    GX_SetCopyClear(background, 0x00ffffff);
+
+    // 3. Initialize the console for printf output
     console_init(xfb, 20, 20, rmode->fbWidth, rmode->xfbHeight, rmode->fbWidth * VI_DISPLAY_PIX_SZ);
+    
+    // 4. Finalize video setup and make it visible
     VIDEO_Configure(rmode);
     VIDEO_SetNextFramebuffer(xfb);
     VIDEO_SetBlack(FALSE);
@@ -70,37 +85,28 @@ int main(int argc, char **argv) {
     VIDEO_WaitVSync();
     if (rmode->viTVMode & VI_NON_INTERLACE) VIDEO_WaitVSync();
 
-    // 2. Print a start message
+    // 5. Run the application logic
     printf("\n\nHello Wii! Preparing to run benchmark...\n");
     printf("Press the HOME button to exit at any time.\n\n");
-    
-    // Give the user a moment to read
-    // sleep(2);
-
+    sleep(2);
     printf("Starting benchmark (100,000,000 iterations)...\n");
 
-    // 3. Run your code
     run_benchmark();
     
-    // 4. Print a finish message
     printf("Benchmark finished!\n");
     printf("The application will now loop. Press HOME to exit.\n");
 
-    // 5. Loop forever, waiting for the user to press the HOME button
+    // 6. Main loop to keep the application running
     while (1) {
-        // Scan for controller input
         WPAD_ScanPads();
         u32 pressed = WPAD_ButtonsDown(0);
 
-        // If HOME button is pressed, exit the loop
         if (pressed & WPAD_BUTTON_HOME) {
-            break;
+            break; // Exit the loop to end the program
         }
 
-        // Wait for the next vertical blank
         VIDEO_WaitVSync();
     }
 
-    // The program will exit cleanly back to the Homebrew Channel
     return 0;
 }
