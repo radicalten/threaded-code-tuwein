@@ -93,12 +93,13 @@ int main(int argc, char **argv) {
 	count--;
 	ip=prog;
 	end = clock();
-	cpu_time_used = ((double) (end - start));
+	cpu_time_used = (end - start) / CLOCKS_PER_SEC;
 	//cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC; 
 	printf("start %lu \n", start);
 	printf("end %lu \n", end);	
 	printf("start-end %lu \n", end-start);		
 	printf("cpu_time_used %lu \n", cpu_time_used);	
+	printf("cpu_time_used %lu \n", CLOCKS_PER_SEC);		  
 	//printf("took %.9f seconds to execute (CPU time)\n", cpu_time_used); // cycles = measured user time * clock frequency in MHz / 1000
 	//printf("total cycles %.9f is time * clockfrequency div 1000Mhz \n", cpu_time_used*.729);
 	NEXT;
