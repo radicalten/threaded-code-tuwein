@@ -14,7 +14,6 @@ extern Inst prog[];
 
 #define NEXT ((*ip++)())
 
-u64 start_time_slow = gettick(); // Get start time in ticks
 
 void next1()
 {
@@ -49,6 +48,17 @@ void loop()
     exit(0);
   count--;
   ip=prog;
+  
+	u64 start_time_slow = gettick();
+	if (count % 10000000 == 0){	  // checks every 10M loop iterations using moduluo op
+	u64 end_time_slow = gettick();   // Get end time in ticks
+	u64 diff_ticks_slow = diff_ticks(start_time_slow, end_time_slow);
+	u64	num1_ticks = ticks_to_cycles(diff_ticks_slow);
+	u64 milliseconds_slow = ticks_to_millisecs(diff_ticks_slow);
+	("Execution took: %llu milliseconds (ms)\n\n", milliseconds_slow);
+	("cycles: %llu \n\n", num1_ticks);	
+ 	u64 start_time_slow = gettick();
+	}	
 }
 
 Inst prog[] = {next1,next2,next1,next3,next1,next4,next1,next5,next1,loop};
@@ -105,18 +115,7 @@ int main(int argc, char **argv) {
 	printf("\x1b[2;0H");
 
   ip=prog;
-  u64 start_time_slow = gettick(); // Get start time in ticks
-  
   for (;;){
-	if (count % 10000000 == 0){	  // checks every 10M loop iterations using moduluo op
-	u64 end_time_slow = gettick();   // Get end time in ticks
-	u64 diff_ticks_slow = diff_ticks(start_time_slow, end_time_slow);
-	u64	num1_ticks = ticks_to_cycles(diff_ticks_slow);
-	u64 milliseconds_slow = ticks_to_millisecs(diff_ticks_slow);
-	("Execution took: %llu milliseconds (ms)\n\n", milliseconds_slow);
-	("cycles: %llu \n\n", num1_ticks);	
- 	u64 start_time_slow = gettick();
-}
     NEXT;
   }
   
