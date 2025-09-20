@@ -67,7 +67,7 @@ int main(int argc, char **argv) {
 //Begin v2 switch.c	
   static int prog[] = {0,1,0,2,0,3,0,4,0,5};
   int *ip=prog;
-  int    count = 100000000;
+  int    count = 1000;
 
   for (;;) {
     switch (*ip++) {
@@ -79,9 +79,6 @@ int main(int argc, char **argv) {
       NEXT;
     case 2:
       guard(2);
-    cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
-    printf("took %f seconds to execute (CPU time)\n", cpu_time_used); // cycles = measured user time * clock frequency in MHz / 1000
-	printf("total cycles %f is time * clockfrequency div 1000Mhz \n", cpu_time_used*.729);	
       NEXT;
     case 3:
       guard(3);
@@ -97,6 +94,10 @@ int main(int argc, char **argv) {
 	/* the rest is to get gcc to make a realistic switch statement */
       }
       else {  
+	end = clock();
+	cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
+    printf("took %f seconds to execute (CPU time)\n", cpu_time_used); // cycles = measured user time * clock frequency in MHz / 1000
+	printf("total cycles %f is time * clockfrequency div 1000Mhz \n", cpu_time_used*.729);	
 	exit(0);
 	  }
     case 12:
