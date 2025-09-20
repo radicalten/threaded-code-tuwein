@@ -1,6 +1,6 @@
 .SUFFIXES:
-
 include $(DEVKITPPC)/wii_rules
+
 CC 		:= $(DEVKITPPC)/bin/powerpc-eabi-gcc
 
 export TARGET 	:= $(notdir $(CURDIR))
