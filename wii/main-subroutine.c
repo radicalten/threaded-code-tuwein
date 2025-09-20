@@ -139,6 +139,28 @@ void loop()
 // 15.72 fps 0.0001s or .0000729 cycles
 //all tests done with JIT ARM64, HLE audio, no audio backend 
 
+
+/*
+Timings:  Dual Core (speedhack) (disabled), Audio HLE, No Audio Output, JIT Recompiler for ARM64
+
+Unlimited speed fps 
+Switch:  3.20 fps (higher is better)
+Repl-Switch: 3.63 fps
+Call:  2.60 fps
+Subroutine: 27.00 fps
+
+100% speed fps
+Switch:  0.60 fps (higher is better)
+Repl-Switch: 0.54 fps
+Call:  0.64 fps
+Subroutine: 5.17 fps
+
+Switch: 72.9 cycles per dispatch (lower is better). 
+Repl-Switch: 70.3-72.9 cycles per dispatch (lower is better). 
+Call:  72.9 cycles per dispatch (lower is better). 
+Subroutine: 72.915 cycles per dispatch (lower is better). 
+*/
+
 // Update main-subroutine.c #154
 // Execution took: 3819 miliseconds (ms)
 // cycles: 2784708996000
