@@ -99,7 +99,7 @@ int main(int argc, char **argv) {
 	printf("end %lu \n", end);	
 	printf("start-end %lu \n", end-start);		
 	printf("cpu_time_used %lu \n", cpu_time_used);	
-	printf("cpu_time_used %lu \n", CLOCKS_PER_SEC);		  
+	printf("CLOCKS_PER_SEC %lu \n", CLOCKS_PER_SEC);		  
 	//printf("took %.9f seconds to execute (CPU time)\n", cpu_time_used); // cycles = measured user time * clock frequency in MHz / 1000
 	//printf("total cycles %.9f is time * clockfrequency div 1000Mhz \n", cpu_time_used*.729);
 	NEXT;
