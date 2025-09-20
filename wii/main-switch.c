@@ -79,6 +79,9 @@ int main(int argc, char **argv) {
       NEXT;
     case 2:
       guard(2);
+    cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
+    printf("took %f seconds to execute (CPU time)\n", cpu_time_used); // cycles = measured user time * clock frequency in MHz / 1000
+	printf("total cycles %f is time * clockfrequency div 1000Mhz \n", cpu_time_used*.729);	
       NEXT;
     case 3:
       guard(3);
@@ -89,10 +92,7 @@ int main(int argc, char **argv) {
     case 5:
       if (count>0) {
 	count--;
-	ip=prog;
-    cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
-    printf("took %f seconds to execute (CPU time)\n", cpu_time_used); // cycles = measured user time * clock frequency in MHz / 1000
-	printf("total cycles %f is time * clockfrequency div 1000Mhz \n", cpu_time_used*.729);		  
+	ip=prog;	  
 	NEXT;
 	/* the rest is to get gcc to make a realistic switch statement */
       }
@@ -129,3 +129,5 @@ int main(int argc, char **argv) {
 
 	return 0;
 }
+
+// 15.72 fps 0.0001s or .0000729 cycles
