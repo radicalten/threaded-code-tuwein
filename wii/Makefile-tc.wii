@@ -19,9 +19,8 @@ ELF2DOL   		:= elf2dol
 BIN2O 			:= bin2o
 
 FLAGS    		+= -O3 -Wall -Wextra -ffast-math -fpermissive
-DEFINES  		+=
 
-CFLAGS 			+= $(FLAGS) $(DEFINES) $(INCLUDES) 
+CFLAGS 			+= $(FLAGS) $(INCLUDES) 
 export LDFLAGS 	+= $(CFLAGS) $(MACHDEP) \
 -Wl,-Map,$(notdir $@).map \
 -L/opt/devkitpro/portlibs/wii/lib \
@@ -30,17 +29,17 @@ export LDFLAGS 	+= $(CFLAGS) $(MACHDEP) \
 -L. \
 -lwiiuse -lbte -lfat -logc -lm
 
-all: $(TARGET).dol 
+all: $(TARGET).dol
+$(TARGET).elf: $(OBJECTS)
+	$(CC) $^ -o $@ $(LDFLAGS)
+
 $(TARGET).dol: $(TARGET).elf
 	$(ELF2DOL) $< $@
-
-$(TARGET).elf: $(OBJECTS) 
-	$(CC) $^ -o $@ $(LDFLAGS)
 
 %.o: %.c
 	$(CC) -c $< -o $@ $(CFLAGS)
 
 clean:
-	@rm -fr $(TARGET).elf $(TARGET).dol $(TARGET).map $(OBJECTS)
+	rm -f $(TARGET).elf $(TARGET).dol $(TARGET).map $(OBJECTS)
 
 .PHONY: test clean
