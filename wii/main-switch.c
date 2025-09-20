@@ -157,6 +157,23 @@ int main(int argc, char **argv) {
 //(11006551188000/10000000)/15098 = 72.90 cycles per dispatch
 //(12230582664000/10000000)/16777 = 72.90 cycles per dispatch
 
+/*
+minimal setup:
+#include <ogc/lwp_watchdog.h>
+
+u64 start_time_slow = gettick(); // Get start time in ticks
+loop()
+if (count % 10000000 == 0){	  // checks every 10M loop iterations using moduluo op
+	u64 end_time_slow = gettick();   // Get end time in ticks
+	u64 diff_ticks_slow = diff_ticks(start_time_slow, end_time_slow);
+	u64	num1_ticks = ticks_to_cycles(diff_ticks_slow);
+	u64 milliseconds_slow = ticks_to_millisecs(diff_ticks_slow);
+	printf("Execution took: %llu milliseconds (ms)\n\n", milliseconds_slow);
+	printf("cycles: %llu \n\n", num1_ticks);	
+ 	u64 start_time_slow = gettick();
+ }
+*/
+
 
 // https://www.complang.tuwien.ac.at/forth/threading/
 /*
