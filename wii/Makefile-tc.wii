@@ -24,7 +24,6 @@ FLAGS    		+= -O3 -Wall -Wextra -ffast-math -fpermissive
 DEFINES  		+=
 CFLAGS 			+= $(FLAGS) $(INCLUDES) 
 export LDFLAGS 	+= $(CFLAGS) $(MACHDEP) \
--Wl,-Map,$(notdir $@).map \
 -L$(DEVKITPRO)/libogc/lib/wii \
 -lfat -lwiiuse -lbte -logc -lm
 
@@ -36,5 +35,5 @@ $(TARGET).elf: $(OBJECTS)
 %.o: %.c
 	$(CC) -c $< -o $@ $(CFLAGS)
 clean:
-	@rm -fr $(TARGET).elf $(TARGET).dol $(TARGET).map $(OBJECTS)
+	@rm -fr $(TARGET).elf $(TARGET).dol $(OBJECTS)
 .PHONY: test clean
