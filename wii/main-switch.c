@@ -96,11 +96,13 @@ int main(int argc, char **argv) {
       if (count>0) {
 	count--;
 	ip=prog;
+	if (count == 1000 || 2000 || 3000 || 4000 || 5000 || 6000 || 7000 || 8000 || 9000 || 10000){	  
 	u64 end_time_slow = gettick();   // Get end time in ticks
 	u64 diff_ticks_slow = diff_ticks(start_time_slow, end_time_slow);
 	u64 milliseconds_slow = ticks_to_millisecs(diff_ticks_slow);
 	printf("Execution took: %llu milliseconds (ms)\n\n", milliseconds_slow);
 	printf("cycles: %f \n\n", milliseconds_slow*.000729); // cycles = measured user time * clock frequency in MHz / 1000	
+	}
 	NEXT;
 	/* the rest is to get gcc to make a realistic switch statement */
       }
