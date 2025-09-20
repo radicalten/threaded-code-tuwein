@@ -27,7 +27,7 @@ export LDFLAGS 	+= $(CFLAGS) $(MACHDEP) \
 -L/opt/devkitpro/portlibs/ppc/lib \
 -L/opt/devkitpro/devkitPPC/lib \
 -L. \
--l:-lwiiuse -lbte -logc -lm
+-lwiiuse -lbte -logc -lm
 
 all: $(TARGET).dol 
 $(TARGET).dol: $(TARGET).elf
