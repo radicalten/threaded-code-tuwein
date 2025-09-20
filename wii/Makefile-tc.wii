@@ -6,13 +6,16 @@ CC 				:= powerpc-eabi-gcc
 
 export TARGET 	:= $(notdir $(CURDIR))
 BUILD 			:= build
-SRCDIR			:= ./wii
+SRCDIR			:= wii
+DATA 			:= 
 C_SOURCES 		:= $(foreach dir,$(SRCDIR),$(notdir $(wildcard $(dir)/*.c)))
 export INCLUDES := -I$(DEVKITPRO)/libogc/include -I/opt/devkitpro/portlibs/wii/include -I/opt/devkitpro/portlibs/ppc/include
 
 C_OBJECTS 		:= $(C_SOURCES:.c=.o)
 export OBJECTS 	:= $(C_OBJECTS) 
 
+export VPATH	:= $(foreach dir,$(SRCDIR),$(CURDIR)/$(dir)) \
+				$(foreach dir,$(DATA),$(CURDIR)/$(dir))
 export LD		:= $(CC)
 ELF2DOL   		:= elf2dol
 BIN2O 			:= bin2o
