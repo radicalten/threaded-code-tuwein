@@ -110,8 +110,7 @@ int main(int argc, char **argv) {
 	// e.g. printf ("\x1b[%d;%dH", row, column );
 	printf("\x1b[2;0H");
 
-	u64 start_time_slow = gettick(); // Get start time in ticks
-  int count = 100000000; 
+  u64 start_time_slow = gettick(); // Get start time in ticks
   ip=prog;
   
   for (;;){
