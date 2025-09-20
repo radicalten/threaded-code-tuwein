@@ -1,3 +1,5 @@
+include $(DEVKITPPC)/wii_rules
+
 TARGET      := prog
 BUILD       := build
 SOURCES     := .
