@@ -29,10 +29,10 @@ export LDFLAGS 	+= $(CFLAGS) $(MACHDEP) \
 -lwiiuse -lbte -lfat -logc -lm
 
 all: $(TARGET).dol
-$(TARGET).elf: $(OBJECTS)
-	$(CC) $^ -o $@ $(LDFLAGS)
 $(TARGET).dol: $(TARGET).elf
 	$(ELF2DOL) $< $@
+$(TARGET).elf: $(OBJECTS)
+	$(CC) $^ -o $@ $(LDFLAGS)
 %.o: %.c
 	$(CC) -c $< -o $@ $(CFLAGS)
 clean:
