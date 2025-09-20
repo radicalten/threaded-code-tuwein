@@ -2,7 +2,8 @@ include $(DEVKITPPC)/wii_rules
 
 TARGET      := prog
 BUILD       := build
-SOURCES     := ./wii/main.c
+SRCDIR			:= wii
+C_SOURCES 		:= $(foreach dir,$(SRCDIR),$(notdir $(wildcard $(dir)/*.c)))
 DATA        :=
 INCLUDES    := .
 
