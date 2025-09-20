@@ -61,12 +61,12 @@ int main(int argc, char **argv) {
     u64 end_time_slow = gettick();   // Get end time in ticks
 	
 	u64 diff_ticks_slow = diff_ticks(start_time_slow, end_time_slow);
-    u32 microseconds_slow = ticks_to_microsecs(diff_ticks_slow);
-    u32 milliseconds_slow = ticks_to_millisecs(diff_ticks_slow);
+    u64 microseconds_slow = ticks_to_microsecs(diff_ticks_slow);
+    u64 milliseconds_slow = ticks_to_millisecs(diff_ticks_slow);
 
     printf("Execution took: %llu ticks\n", diff_ticks_slow);
-    printf("Execution took: %lu microseconds (us)\n", microseconds_slow);
-    printf("Execution took: %lu milliseconds (ms)\n\n", milliseconds_slow);
+    printf("Execution took: %llu microseconds (us)\n", microseconds_slow);
+    printf("Execution took: %llu milliseconds (ms)\n\n", milliseconds_slow);
 	
 //Begin v2 switch.c	
   static int prog[] = {0,1,0,2,0,3,0,4,0,5};
