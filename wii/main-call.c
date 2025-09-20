@@ -168,6 +168,8 @@ int main(int argc, char **argv) {
 //(11356538676000/10000000)/15578 = 72.90 cycles per dispatch (lower is better
 //(17123676660000/10000000)/23489 = 72.90 cycles per dispatch
 
+//either these results are truly identical... or there is something seriously wrong with my testing
+
 
 /*
 minimal setup:
