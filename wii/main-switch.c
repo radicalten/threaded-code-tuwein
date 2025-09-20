@@ -67,7 +67,7 @@ int main(int argc, char **argv) {
 //Begin v2 switch.c	
   static int prog[] = {0,1,0,2,0,3,0,4,0,5};
   int *ip=prog;
-  int    count = 1000;
+  int    count = 100000000;
 
   for (;;) {
     switch (*ip++) {
