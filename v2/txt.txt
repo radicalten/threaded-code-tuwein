@@ -1,1 +1,110 @@
+https://www.complang.tuwien.ac.at/forth/threading/
 
+Speed of various interpreter dispatch techniques V2
+Cycles per dispatch
+
+sub-		in-	              repl.
+routine	direct	direct	switch	call switch CPU, Machine, gcc
+ 4.2     2.1     2.0    15.0    24.0   3.4  Ryzen 7 5800X (Zen 3), gcc 10.2 -O3 -fomit-frame-pointer -fno-inline
+ 4.2     2.8     2.7     7.3     7.1   3.7  Ryzen 9 3900X (Zen 2), gcc 8.3 -O3 -fomit-frame-pointer -fno-inline
+ 4.2     3.3     3.2    17.9    23.1   4.2  Ryzen 5 1600X (Zen), gcc 8.3 -O3 -fomit-frame-pointer -fno-inline
+ 3.8     1.0     1.1     3.8     6.2   2.2  Core i5-1135G7 (Tiger Lake), gcc 10.3 -O3 -fomit-frame-pointer -fno-inline
+ 4.2     2.1     2.0     4.9     5.2   2.7  Core i5-6600K (Skylake), gcc 10.2 -O3 -fomit-frame-pointer -fno-inline
+ 4.0     2.3     2.3     4.0     5.1   3.5  Core i7-4790K (Haswell), gcc-4.9.2 -O3 -fomit-frame-pointer -fno-inline
+ 4.4     2.2     2.0    20.3    18.6   3.3  Xeon E3-1220 (Sandy Bridge), gcc 8.3 -O3 -fomit-frame-pointer -fno-inline
+ 6.2     4.2     4.7     5.1     8.9        Xeon 5160 3GHz, gcc 4.1.2 20061115
+ 4.6    10.0    11.2    27.0    25.3  15.1  Celeron J3455 (Gemini Lake), gcc 8.3 -O3 -fomit-frame-pointer -fno-inline
+ 8.6	14.2	15.3	23.4	30.2        Pentium 4 2.26, gcc-2.95.3
+ 4.9	 5.6	 4.3	 5.1	 7.64       Pentium M 755 2GHz, gcc-3.4.2
+ 4.7	 8.1	 9.5	19.0	21.3        Pentium III 1000MHz, gcc-2.95.3
+18.5	 8.8	10.9	24.8	27.9        Opteron 240 1400MHz, gcc-2.95.3 (32-bit code)
+18.4	 8.5	10.3	24.5	29.0        Athlon (Thunderbird) 1200MHz, gcc-2.95.1
+ 4.3	 9.0	11.0	11.7	12.5        K6-2 333MHz, gcc-3.2.2 -fno-reorder-blocks
+
+13.3	10.3	12.3	15.7	18.7        Itanium 2 (McKinley) 900MHz, rx2600, gcc-3.3 -fno-crossjumping
+ 9.6	 8.0     9.5	23.1	38.6        Alpha 21264B 800MHz, UP1500, gcc-2.95.2
+ 7.9	 8.4	 9.9	18.2	18.0        Alpha 21164A 600MHz, 164LX, gcc-2.95.2
+ 7.8	 8.7	10.7	18.5	16.9        Alpha 21164PC 533MHz, SX164, gcc-3.3.2 -fno-reorder-blocks
+ 7.2	 9.6	12.0	24.6	19.8        Alpha 21064a, 300MHz, AlphaPC64, gcc-2.95.1
+ 6.9    24.5    27.3    37.1    33.5  36.6  Power9 3800MHz, gcc-4.8.5
+ 7.8    12.8    12.9    30.2    39.0        PPC 970 2000MHz, PowerMac G5, gcc-2.95 (32 bit)
+ 5.7     9.2    12.3    16.3    17.9        PPC 7447A 1066MHz, iBook G4, gcc-2.95
+ 4.2	 5.8	 7.7	11.3	11.3        PPC 7400 450MHz, PowerMac G4, gcc-3.3.2 -fno-reorder-blocks
+ 5.7	 7.2	 9.2	13.6	13.4        PPC 604e 200MHz, Mac 7500, gcc-2.95.2
+ 5.8	10.8	13.7	20.2	46.1        PA8500 360MHz, HP 9000/L2000, gcc-3.2 -fno-reorder-blocks
+14.2	14.6	18.7	25.3	72.5        PA8200 240MHz, HP 9000/K260, gcc-2.95.2
+ 7.3	11.4	 7.9	11.4	20.4        PA7100LC 64MHz, HP 9000/816, gcc-3.3.2 -fno-reorder-blocks
+ 6.2	 6.1	 8.0	14.6	12.6        MicroSPARC II 110MHz, gcc-3.3.2 -fno-reorder-blocks
+10      11      14      21      29          UltraSPARC T1 1GHz, Sun Fire T1000, gcc-4.0.2
+17.53	 8.3	10.4	14.7	17.4        MIPS R10000 195MHz, SGI PowerChallenge, gcc-2.8.1
+13.0	 5.6	 7.6	17.7	18.4        MIPS R3000 20MHz, DecStation 5000/120, gcc-3.3.1 -fno-reorder-blocks
+ 7.0	 5.7	 6.8	 9.8	13.5        strongARM SA-1110, iPAQ 3650, gcc-2.95.4 20010703
+ 8.8     8.2    10.9    14.5    19.5        XScale IOP321, Iyonix, gcc 4.1.2 20061115
+13.6     8.9    11.0    22.0    24.5  11.8  Cortex A9 1.2GHz, OMAP 4430, PandaBoard ES, gcc-4.6.3 -marm -O3 -fomit-frame-pointer -fno-inline
+ 5.0     9.8    12.7    31.5    31.4  17.7  Cortex A8 1.0GHz, Beaglebone Black, gcc-8.3.0
+
+Aarch64
+ 6.6     5.1     6.1    12.5    14.4   8.9  Cortex-A53 1536MHz, Odroid C2, gcc 5.3.1 -O3 -fomit-frame-pointer -fno-inline
+ 4.2     4.1     4.0     9.0    11.2   5.9  Cortex-A72 1.8GHz, RockPro64, gcc 6.3 -O3 -fomit-frame-pointer -fno-inline
+ 5.7     3.2     3.9     7.0     8.6   3.7  Cortex-A73 1.8GHz, Odroid N2, gcc 7.5 -O3 -fomit-frame-pointer -fno-inline
+ 
+
+                                              
+Comparison of compilers and options:          
+                                              
+18.9	16.4	18.6	24.6	35.1	      Opteron 240 1400MHz, gcc-3.3.1 -fno-crossjumping
+16.0	15.7	18.8	21.4	37.1	      Opteron 240 1400MHz, gcc-3.3.1 -fno-crossjumping -m32 (32-bit code)
+18.5	 8.8	10.9	24.8	27.9	      Opteron 240 1400MHz, gcc-2.95.3 (32-bit code)
+18.4	 8.5	10.3	24.5	29.0	      Athlon (Thunderbird) 1200MHz, gcc-2.95.1
+21.5	18.0	21.8	24.5	30.5	      Athlon (Thunderbird) 900MHz, gcc-3.2.2 -fno-reorder-blocks
+
+What is measured?
+You can find an explanation of the dispatch techniques in the threaded code page, and the source code for the benchmarks here.
+Downloading and running
+
+wget http://www.complang.tuwien.ac.at/forth/threading/threading.tar.gz
+gzip -cd threading.tar.gz|tar xf -
+cd threading
+make
+
+You can compute the cycles per dispatch as
+
+cycles = measured user time * clock frequency in MHz / 1000
+
+If you want to provide options to the compiler, do this through the make variables CC (to provide additional options) or CFLAGS (to override the default options -O -fomit-frame-pointer):
+
+make CC="gcc -V2.95"
+
+Differences between V1 and V2
+My interpreter dispatch micro-benchmark V1 was unrealistic on processors with BTBs and similar indirect branch predictors. Here you will find adapted benchmarks for processors without BTBs, with BTBs (Pentium-Pentium III, Athlon, 21264) and with trace cache and BTBs (Pentium 4). I.e., the indirect branch prediction accuracy will be relatively realistic on all of these machines: the benchmarks are designed to produce 50% mispredictions for direct and indirect threaded code, and 100% indirect branch mispredictions for switch dispatch on machines with a simple BTB; this corresponds to the prediction accuracies of these dispatch techniques on various large benchmarks on several virtual machines (see "The behaviour of efficient virtual machine interpreters on modern architectures").
+
+The V2 switch dispatch benchmark is written in a way that introduces a jump back to the dispatch code on the gcc versions we have tested, which is what will happen in real-world interpreters (whereas in the V1 version gcc optimized this jump away for 90% of the executed dispatches).
+
+There is still the problem of the benchmark not being realistic wrt the non-dispatch work done. This work costs different amounts of time on different machines, and with different dispatch techniques (much of this work can be done in parallel with the dispatch work on some machines and with some dispatch techniques).
+Comments on various machines and compilers
+
+gcc-3.2.x, gcc-3.3.x
+    These compilers perform an "optimization" called cross-jumping (even if yo turn it off with -fno-cross-jumping on gcc-3.3), that costs lots of performance for direct and indirect threaded code, especially on machines with BTBs. The recommended compiler for Gforth is gcc-2.95.*, but for this micro-benchmark anything up to gcc-3.0.4 should perform well. You can see the difference between gcc-2.95 and gcc-3.[23] on the Opteron and Athlon results. 
+Pentium 4
+    The Pentium 4 gives wildly varying timings for switch (down to 17 cycles). The displayed time is the one that we see most frequently, corresponding to about 0.8 indirect branch mispredictions per dispatch; the best times are with 0.5 indirect branch mispredictions per dispatch. 
+Athlon, Opteron
+    The high time on the subroutine threading benchmark seems to be specific to this microbenchmark; inserting two nops at the start of the next() functions reduces the time to 14.6 cycles on the Athlon; 5-7 nops reduce the time to 4.9 cycles on the Opteron (gcc-3.3.1 -m32). 
+21264B
+    also had quite a bit of variations between runs. This CPU is also extremely sensitive to code alignment (misalignment penalty ~8 cycles for direct.c) and insertion of independent instructions. 
+Alphas (all kinds)
+    There are two calling conventions for compiling subroutine.c: the general calling convention can call code within umptillion GBs and provides one data area per procedure. There is also another calling convention that restricts calls to within +/- 4MB, and has only one 64KB global data area. egcs-1.03 uses the general convention for the current subroutine.c, and the restricted convention if main() is put after the other routines. Using the restricted convention gives significant speedups: 5.97 cycles on the 21064a, 5.22 cycles on the 21164a, 4.6 cycles on the 21264. Which convention is more appropriate depends on the system (for RAFTS/Alpha we will probably use the restricted convention). 
+Itanium 2
+    This CPU predicts that the indirect branch target is the contents of the branch register some cycles before the branch is architecturally executed. So if the branch register gets its value too late, this will usually cause a misprediction in an interpreter, unless the interpreter happens to execute the same virtual machine instruction several times in a row (then only the last branch in the sequence will be mispredicted), which is very rare in stack-based interpreters, but occurs more often in register-based VMs (14%-19% for yap). Our micro-benchmark produces a 100% misprediction rate, which is realistic for interpreters with short VM instructions. 
+
+Anton Ertl
+[ICO]	Name	Last modified	Size	Description
+[PARENTDIR]	Parent Directory	 	- 	 
+[ ]	Makefile	2021-10-28 12:50 	852 	 
+[TXT]	call.c	2021-10-28 12:36 	506 	 
+[TXT]	direct.c	2021-10-28 12:36 	543 	 
+[TXT]	indirect.c	2021-10-28 12:36 	588 	 
+[TXT]	repl-switch.c	2021-10-28 12:36 	629 	 
+[TXT]	subroutine.c	2021-10-28 12:36 	503 	 
+[TXT]	switch.c	2021-10-28 12:36 	668 	 
+[ ]	threading.tar.gz	2021-10-28 12:51 	1.6K	 
+Apache/2.4.62 (Debian) OpenSSL/3.0.15 Server at www.complang.tuwien.ac.at Port 443
