@@ -34,7 +34,7 @@ int main(int argc, char **argv)
 	/* the rest is to get gcc to make a realistic switch statement */
       }
       else
-	exit(0);
+	return 0;
     case 12:
     case 8:
       count=25;
