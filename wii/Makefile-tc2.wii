@@ -2,7 +2,7 @@ include $(DEVKITPPC)/wii_rules
 
 TARGET      := prog
 BUILD       := build
-SOURCES     := .
+SOURCES     := ./wii/main.c
 DATA        :=
 INCLUDES    := .
 
