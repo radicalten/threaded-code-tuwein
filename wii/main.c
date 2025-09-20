@@ -75,7 +75,7 @@ int main(int argc, char **argv) {
     printf("Press the HOME button to exit at any time.\n\n");
     
     // Give the user a moment to read
-    sleep(2);
+    // sleep(2);
 
     printf("Starting benchmark (100,000,000 iterations)...\n");
 
