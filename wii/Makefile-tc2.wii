@@ -7,6 +7,9 @@ C_SOURCES 		:= $(foreach dir,$(SRCDIR),$(notdir $(wildcard $(dir)/*.c)))
 DATA        :=
 INCLUDES    := .
 
+C_OBJECTS 		:= $(C_SOURCES:.c=.o)
+export OBJECTS 	:= $(C_OBJECTS) 
+
 # devkitPPC environment
 PREFIX      := powerpc-eabi
 CC          := $(PREFIX)-gcc
