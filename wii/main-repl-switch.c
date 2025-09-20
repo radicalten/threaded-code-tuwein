@@ -153,7 +153,7 @@ if (count % 10000000 == 0){	  // checks every 10M loop iterations using moduluo 
 
 
 //if (count % 10000000 == 0){ main-repl-switch.c
-//(5371188024000/10000000)/7637 = 72.90 cycles per dispatch (lower is better)
+//(5371188024000/10000000)/7637 = 70.33 cycles per dispatch (lower is better)
 //(12087060204000/10000000)/16580 = 72.90 cycles per dispatch
 
 //if (count % 10000000 == 0){ main-switch.c
@@ -161,10 +161,11 @@ if (count % 10000000 == 0){	  // checks every 10M loop iterations using moduluo 
 //(12230582664000/10000000)/16777 = 72.90 cycles per dispatch
 
 //if (count % 10000000 == 0){ main-call.c	  
-//(11356538676000/10000000)/15578 = 72.90 cycles per dispatch (lower is better
+//(11356538676000/10000000)/15578 = 72.90 cycles per dispatch (lower is better)
 //(17123676660000/10000000)/23489 = 72.90 cycles per dispatch
 
 //either these results are truly identical... or there is something seriously wrong with my testing
+//main-repl-switch had one result that was different from 72.90--which just appears to be an artifact of the 729Mhz cpu 
 
 
 /*
