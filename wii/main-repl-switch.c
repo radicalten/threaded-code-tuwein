@@ -125,7 +125,7 @@ if (count % 10000000 == 0){	  // checks every 10M loop iterations using moduluo 
 }
 
 // 15.72 fps 0.0001s or .0000729 cycles
-//all tests done with JIT ARM64 
+//all tests done with JIT ARM64, HLE audio, no audio backend 
 
 // Update main-repl-switch.c #146
 // Execution took: 7637 miliseconds (ms)
