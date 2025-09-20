@@ -127,6 +127,14 @@ if (count % 10000000 == 0){	  // checks every 10M loop iterations using moduluo 
 // 15.72 fps 0.0001s or .0000729 cycles
 //all tests done with JIT ARM64 
 
+// Update main-repl-switch.c #146
+// Execution took: 7637 miliseconds (ms)
+// cycles: 5371188024000
+// Execution took: 14736 miliseconds (ms)
+// cycles: 10742787048000
+// Execution took: 16580 miliseconds (ms)
+// cycles: 12087060204000
+
 //Update main-call.c #141 
 // Execution took: 15578 miliseconds (ms)
 // cycles: 11356538676000
@@ -142,6 +150,11 @@ if (count % 10000000 == 0){	  // checks every 10M loop iterations using moduluo 
 // cycles: 11006551188000
 // Execution took: 16777 miliseconds (ms)
 // cycles: 12230582664000
+
+
+//if (count % 10000000 == 0){ main-repl-switch.c
+//(5371188024000/10000000)/7637 = 72.90 cycles per dispatch (lower is better)
+//(12087060204000/10000000)/16580 = 72.90 cycles per dispatch
 
 //if (count % 10000000 == 0){ main-switch.c
 //(11006551188000/10000000)/15098 = 72.90 cycles per dispatch (lower is better)
