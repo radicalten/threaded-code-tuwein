@@ -3,7 +3,7 @@
 #define NEXT break
 #define guard(n) asm("#" #n)
 
-int main(void)
+int main(int argc, char **argv)
 {
   static int prog[] = {0,1,0,2,0,3,0,4,0,5};
   int *ip=prog;
