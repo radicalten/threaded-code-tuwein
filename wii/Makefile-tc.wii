@@ -22,7 +22,7 @@ ELF2DOL   		:= elf2dol
 MACHDEP 		:= -DGEKKO -mrvl -mcpu=750 -meabi -mhard-float -fsigned-char -ffast-math -funroll-loops -fauto-inc-dec -finline-functions
 FLAGS    		+= -O3 -Wall -Wextra -ffast-math -fpermissive
 DEFINES  		+=
-CFLAGS 			+= $(FLAGS) $(INCLUDES) 
+CFLAGS 			+= $(FLAGS) $(DEFINES) $(INCLUDES) 
 export LDFLAGS 	+= $(CFLAGS) $(MACHDEP) \
 -L$(DEVKITPRO)/libogc/lib/wii \
 -logc -lm
