@@ -6,6 +6,7 @@ include $(DEVKITPPC)/wii_rules
 CC 				:= $(DEVKITPPC)/bin/powerpc-eabi-gcc
 
 export TARGET 	:= $(notdir $(CURDIR))
+BUILD 			:= build
 SRCDIR			:= wii
 C_SOURCES 		:= $(foreach dir,$(SRCDIR),$(notdir $(wildcard $(dir)/*.c)))
 export INCLUDES := -I/opt/devkitpro/portlibs/wii/include -I/opt/devkitpro/portlibs/ppc/include
@@ -23,6 +24,10 @@ DEFINES  		+=
 CFLAGS 			+= $(FLAGS) $(DEFINES) $(INCLUDES) 
 export LDFLAGS 	+= $(CFLAGS) $(MACHDEP) \
 -Wl,-Map,$(notdir $@).map \
+-L/opt/devkitpro/portlibs/wii/lib \
+-L/opt/devkitpro/portlibs/ppc/lib \
+-L/opt/devkitpro/devkitPPC/lib \
+-L. \
 -lwiiuse -lbte -lfat -logc -lm
 
 all: $(TARGET).dol 
