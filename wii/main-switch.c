@@ -91,11 +91,11 @@ int main(int argc, char **argv) {
       NEXT;
     case 4:
       guard(4);
-	if (count % 1000000 == 0){	  
+	if (count % 10000000 == 0){	  
 	u64 end_time_slow = gettick();   // Get end time in ticks
 	u64 diff_ticks_slow = diff_ticks(start_time_slow, end_time_slow);
-	u64 milliseconds_slow = ticks_to_millisecs(diff_ticks_slow);
 	u64	num1_ticks = ticks_to_cycles(diff_ticks_slow);
+	u64 milliseconds_slow = ticks_to_millisecs(diff_ticks_slow);
 	printf("Execution took: %llu milliseconds (ms)\n\n", milliseconds_slow);
 	printf("cycles: %llu \n\n", num1_ticks);	
 	//printf("cycles: %f \n\n", milliseconds_slow*.000729); // cycles = measured user time * clock frequency in MHz / 1000	
