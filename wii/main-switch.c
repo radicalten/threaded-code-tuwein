@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <gccore.h>
 #include <wiiuse/wpad.h>
-#include <time.h>
+#include <ogc/lwp_watchdog.h>
 
 #define NEXT break
 #define guard(n) asm("#" #n)
@@ -57,15 +57,17 @@ int main(int argc, char **argv) {
 	// e.g. printf ("\x1b[%d;%dH", row, column );
 	printf("\x1b[2;0H");
 
-
-	printf("Start Clock\n");
+	u64 start_time_slow = gettick(); // Get start time in ticks
+    u64 end_time_slow = gettick();   // Get end time in ticks
 	
-	clock_t start, end;
-    double cpu_time_used;
-    //start = clock();
-	start = 0;
-	end = 0;
+	u64 diff_ticks_slow = diff_ticks(start_time_slow, end_time_slow);
+    u32 microseconds_slow = ticks_to_microseconds(diff_ticks_slow);
+    u32 milliseconds_slow = ticks_to_milliseconds(diff_ticks_slow);
 
+    printf("Execution took: %llu ticks\n", diff_ticks_slow);
+    printf("Execution took: %lu microseconds (us)\n", microseconds_slow);
+    printf("Execution took: %lu milliseconds (ms)\n\n", milliseconds_slow);
+	
 //Begin v2 switch.c	
   static int prog[] = {0,1,0,2,0,3,0,4,0,5};
   int *ip=prog;
@@ -92,16 +94,6 @@ int main(int argc, char **argv) {
       if (count>0) {
 	count--;
 	ip=prog;
-	end = clock();
-	cpu_time_used = (end - start) / CLOCKS_PER_SEC;
-	//cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC; 
-	printf("start %lu \n", start);
-	printf("end %lu \n", end);	
-	printf("start-end %lu \n", end-start);		
-	printf("cpu_time_used %lu \n", cpu_time_used);	
-	printf("CLOCKS_PER_SEC %lu \n", CLOCKS_PER_SEC);		  
-	//printf("took %.9f seconds to execute (CPU time)\n", cpu_time_used); // cycles = measured user time * clock frequency in MHz / 1000
-	//printf("total cycles %.9f is time * clockfrequency div 1000Mhz \n", cpu_time_used*.729);
 	NEXT;
 	/* the rest is to get gcc to make a realistic switch statement */
       }
