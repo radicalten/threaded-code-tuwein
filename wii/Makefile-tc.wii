@@ -2,7 +2,7 @@
 export DEVKITPRO:= /opt/devkitpro
 export DEVKITPPC:= $(DEVKITPRO)/devkitPPC
 include $(DEVKITPPC)/wii_rules
-CC 				:= $(DEVKITPPC)/bin/powerpc-eabi-gcc
+CC 				:= powerpc-eabi-gcc
 
 export TARGET 	:= $(notdir $(CURDIR))
 BUILD 			:= build
