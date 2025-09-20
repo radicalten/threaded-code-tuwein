@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <gccore.h>
 #include <wiiuse/wpad.h>
-#include <ogc/lwp_watchdog.h>
+#include <ogc/timer.h>
 
 #define NEXT break
 #define guard(n) asm("#" #n)
