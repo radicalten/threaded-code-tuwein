@@ -89,11 +89,15 @@ int main(int argc, char **argv) {
     case 5:
       if (count>0) {
 	count--;
-	ip=prog;			
+	ip=prog;	
+	if(end == 0){	  
 	end = clock();
+	}
 	cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
-    printf("took %f seconds to execute (CPU time)\n", cpu_time_used); // cycles = measured user time * clock frequency in MHz / 1000
+	if(end != 0){	  
+	printf("took %f seconds to execute (CPU time)\n", cpu_time_used); // cycles = measured user time * clock frequency in MHz / 1000
 	printf("total cycles %f is time * clockfrequency div 1000Mhz \n", cpu_time_used*.729);
+	}
 	NEXT;
 	/* the rest is to get gcc to make a realistic switch statement */
       }
