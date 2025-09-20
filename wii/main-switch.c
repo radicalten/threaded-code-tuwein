@@ -145,6 +145,18 @@ int main(int argc, char **argv) {
 
 // 15.72 fps 0.0001s or .0000729 cycles
 
+//Update main-switch.c #121
+// Execution took: 13419 miliseconds (ms)
+// cycles: 9782515716000
+// Execution took: 15098 miliseconds (ms)
+// cycles: 11006551188000
+// Execution took: 16777 miliseconds (ms)
+// cycles: 12230582664000
+
+//if (count % 10000000 == 0){	  
+//(11006551188000/10000000)/15098 = 72.90 cycles per dispatch
+//(12230582664000/10000000)/16777 = 72.90 cycles per dispatch
+
 
 // https://www.complang.tuwien.ac.at/forth/threading/
 /*
