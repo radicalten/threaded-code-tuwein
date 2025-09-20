@@ -25,7 +25,7 @@ DEFINES  		+=
 CFLAGS 			+= $(FLAGS) $(DEFINES) $(INCLUDES) 
 export LDFLAGS 	+= $(CFLAGS) $(MACHDEP) \
 -L$(DEVKITPRO)/libogc/lib/wii \
--logc -lm
+-lwiiuse -lbte -logc -lm
 
 all: $(TARGET).dol
 $(TARGET).dol: $(TARGET).elf
