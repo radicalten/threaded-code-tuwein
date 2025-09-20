@@ -32,7 +32,7 @@ $(TARGET).dol: $(TARGET).elf
 	$(ELF2DOL) $< $@
 
 $(TARGET).elf: $(OBJECTS) 
-	$(CXX) $^ -o $@ $(LDFLAGS)
+	$(CC) $^ -o $@ $(LDFLAGS)
 
 %.o: %.c
 	$(CC) -c $< -o $@ $(CFLAGS)
