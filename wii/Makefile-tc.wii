@@ -1,7 +1,7 @@
 .SUFFIXES:
-include $(DEVKITPPC)/wii_rules
 export DEVKITPRO:= /opt/devkitpro
 export DEVKITPPC:= $(DEVKITPRO)/devkitPPC
+include $(DEVKITPPC)/wii_rules
 
 CC 				:= $(DEVKITPPC)/bin/powerpc-eabi-gcc
 
