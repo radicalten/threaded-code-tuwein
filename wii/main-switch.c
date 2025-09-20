@@ -1,10 +1,11 @@
+#define HW_RVL 1
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <gccore.h>
 #include <wiiuse/wpad.h>
 #include <ogc/lwp_watchdog.h>
 
-#define HW_RVL 1
 #define NEXT break
 #define guard(n) asm("#" #n)
 
