@@ -7,6 +7,7 @@
 #include <ogc/lwp_watchdog.h>
 
 #define guard(n) asm("#" #n)
+u64 start_time_slow = 0;
 
 void next1();
 void next2();
@@ -65,8 +66,6 @@ int main(int argc, char **argv) {
 	// we can use variables for this with format codes too
 	// e.g. printf ("\x1b[%d;%dH", row, column );
 	printf("\x1b[2;0H");
-
-  u64 start_time_slow = gettick(); // Get start time in ticks
 
 start:
   next1(); next2(); next1(); next3(); next1();
