@@ -97,6 +97,7 @@ int main(int argc, char **argv) {
 	count--;
 	ip=prog;
 	u64 end_time_slow = gettick();   // Get end time in ticks
+	u64 diff_ticks_slow = diff_ticks(start_time_slow, end_time_slow);
 	u64 milliseconds_slow = ticks_to_millisecs(diff_ticks_slow);
 	printf("Execution took: %llu milliseconds (ms)\n\n", milliseconds_slow);	  
 	NEXT;
