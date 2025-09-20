@@ -1,0 +1,56 @@
+# Makefile for a simple Wii application
+
+# Application name and output files
+TARGET		:=	benchmark
+ELF_FILE	:=	$(TARGET).elf
+DOL_FILE	:=	boot.dol
+# For the Homebrew Channel, the executable must be named boot.elf or boot.dol
+
+# Source files
+SOURCES		:=	main.c
+
+# Include paths and library paths (using devkitPro environment variables)
+INCLUDE		:=	-I$(DEVKITPRO)/libogc/include
+LIBDIRS		:=	-L$(DEVKITPRO)/libogc/lib/wii
+
+# Libraries to link against
+LIBS		:=	-lwiiuse -lbte -logc -lm
+
+# Compiler and flags
+CC			:=	$(DEVKITPPC)/bin/powerpc-eabi-gcc
+CFLAGS		:=	-Wall -O2 -g -mbig-endian -mcpu=750 -meabi -mhard-float $(INCLUDE)
+LD			:=	$(DEVKITPPC)/bin/powerpc-eabi-gcc
+LDFLAGS		:=	$(LIBDIRS) $(LIBS)
+
+# Tool to convert ELF to DOL
+ELF2DOL		:=	$(DEVKITPRO)/tools/bin/elf2dol
+
+# Object files
+OBJS		:=	$(SOURCES:.c=.o)
+
+
+# Default rule: build everything
+all: $(DOL_FILE)
+
+# Rule to link the ELF file
+$(ELF_FILE): $(OBJS)
+	@echo "Linking..."
+	$(LD) $(OBJS) $(LDFLAGS) -o $@
+
+# Rule to convert the ELF to a DOL file
+$(DOL_FILE): $(ELF_FILE)
+	@echo "Converting ELF to DOL..."
+	$(ELF2DOL) $< $@
+	@echo "Build complete: $(DOL_FILE)"
+
+# Rule to compile C source files into object files
+%.o: %.c
+	@echo "Compiling $<..."
+	$(CC) $(CFLAGS) -c $< -o $@
+
+# Rule to clean up build files
+clean:
+	@echo "Cleaning up..."
+	rm -f $(OBJS) $(ELF_FILE) $(DOL_FILE)
+
+.PHONY: all clean
