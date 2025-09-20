@@ -91,7 +91,7 @@ int main(int argc, char **argv) {
       NEXT;
     case 4:
       guard(4);
-	if (count % 100000 == 0){	  
+	if (count % 1000000 == 0){	  
 	u64 end_time_slow = gettick();   // Get end time in ticks
 	u64 diff_ticks_slow = diff_ticks(start_time_slow, end_time_slow);
 	u64 milliseconds_slow = ticks_to_millisecs(diff_ticks_slow);
