@@ -1,11 +1,17 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h> // Needed for memset
+#include <unistd.h> // Needed for sleep()
 #include <gccore.h>
 #include <wiiuse/wpad.h>
 
 // Standard Wii Homebrew boilerplate
 static void *xfb = NULL;
 static GXRModeObj *rmode = NULL;
+
+// GX command buffer (FIFO)
+#define DEFAULT_FIFO_SIZE (256 * 1024)
+static void *gp_fifo = NULL;
 
 // Macro definitions from your original code
 #define NEXT break
@@ -56,28 +62,27 @@ void run_benchmark() {
 
 // Main function for the Wii application
 int main(int argc, char **argv) {
-    // 1. Initialize hardware subsystems
+    // 1. Initialize hardware
     VIDEO_Init();
     WPAD_Init();
     
-    // 2. Configure the video mode
+    // 2. Configure video mode and get a framebuffer
     rmode = VIDEO_GetPreferredMode(NULL);
     xfb = MEM_K0_TO_K1(SYS_AllocateFramebuffer(rmode));
-
-    // ------------------- THE FIX IS HERE -------------------
-    // Initialize the GX graphics subsystem. This MUST be done
-    // before calling console_init(), which uses GX to draw text.
-    GX_Init(xfb, rmode);
-    // -------------------------------------------------------
-
-    // Setup a black background
-    GXColor background = {0, 0, 0, 0xff};
-    GX_SetCopyClear(background, 0x00ffffff);
 
     // 3. Initialize the console for printf output
     console_init(xfb, 20, 20, rmode->fbWidth, rmode->xfbHeight, rmode->fbWidth * VI_DISPLAY_PIX_SZ);
     
-    // 4. Finalize video setup and make it visible
+    // 4. Allocate and initialize the Graphics Processor (GX) command buffer (FIFO)
+    gp_fifo = mem_align(32, DEFAULT_FIFO_SIZE);
+    memset(gp_fifo, 0, DEFAULT_FIFO_SIZE);
+    GX_Init(gp_fifo, DEFAULT_FIFO_SIZE);
+
+    // 5. Setup a black background
+    GXColor background = {0, 0, 0, 0xff};
+    GX_SetCopyClear(background, 0x00ffffff);
+    
+    // 6. Finalize video setup and make the framebuffer visible
     VIDEO_Configure(rmode);
     VIDEO_SetNextFramebuffer(xfb);
     VIDEO_SetBlack(FALSE);
@@ -85,10 +90,12 @@ int main(int argc, char **argv) {
     VIDEO_WaitVSync();
     if (rmode->viTVMode & VI_NON_INTERLACE) VIDEO_WaitVSync();
 
-    // 5. Run the application logic
+    // 7. Run the application logic
     printf("\n\nHello Wii! Preparing to run benchmark...\n");
     printf("Press the HOME button to exit at any time.\n\n");
-    sleep(2);
+    
+    sleep(2); // This will now work
+    
     printf("Starting benchmark (100,000,000 iterations)...\n");
 
     run_benchmark();
@@ -96,13 +103,13 @@ int main(int argc, char **argv) {
     printf("Benchmark finished!\n");
     printf("The application will now loop. Press HOME to exit.\n");
 
-    // 6. Main loop to keep the application running
+    // 8. Main loop to keep the application running
     while (1) {
         WPAD_ScanPads();
         u32 pressed = WPAD_ButtonsDown(0);
 
         if (pressed & WPAD_BUTTON_HOME) {
-            break; // Exit the loop to end the program
+            break;
         }
 
         VIDEO_WaitVSync();
