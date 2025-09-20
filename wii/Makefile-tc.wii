@@ -6,7 +6,7 @@ CC 				:= $(DEVKITPPC)/bin/powerpc-eabi-gcc
 
 export TARGET 	:= $(notdir $(CURDIR))
 BUILD 			:= build
-SRCDIR			:= wii
+SRCDIR			:= .
 DATA 			:= 
 C_SOURCES 		:= $(foreach dir,$(SRCDIR),$(notdir $(wildcard $(dir)/*.c)))
 export INCLUDES := -I$(DEVKITPRO)/libogc/include -I/opt/devkitpro/portlibs/wii/include -I/opt/devkitpro/portlibs/ppc/include
