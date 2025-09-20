@@ -90,7 +90,9 @@ int main(int argc, char **argv) {
       if (count>0) {
 	count--;
 	ip=prog;
-	printf("looping"); // required else it doesn't clock() properly	 	  
+	if (count==10000000){	  
+	printf("looping"); // required else it doesn't clock() properly
+	}
 	if (count==1000000){	  
 	end = clock();
 	cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
