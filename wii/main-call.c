@@ -39,15 +39,6 @@ void next4()
 void next5()
 {
   guard(5);
-	if (count % 10000000 == 0){	  // checks every 10M loop iterations using moduluo op
-	static u64 end_time_slow = gettick();   // Get end time in ticks
-	static u64 diff_ticks_slow = diff_ticks(start_time_slow, end_time_slow);
-	static u64	num1_ticks = ticks_to_cycles(diff_ticks_slow);
-	static u64 milliseconds_slow = ticks_to_millisecs(diff_ticks_slow);
-	printf("Execution took: %llu milliseconds (ms)\n\n", milliseconds_slow);
-	printf("cycles: %llu \n\n", num1_ticks);	
- 	static u64 start_time_slow = gettick();
-}
 }
 
 void loop()
@@ -114,8 +105,18 @@ int main(int argc, char **argv) {
 	printf("\x1b[2;0H");
 
   ip=prog;
+  u64 start_time_slow = gettick(); // Get start time in ticks
   
   for (;;){
+	if (count % 10000000 == 0){	  // checks every 10M loop iterations using moduluo op
+	u64 end_time_slow = gettick();   // Get end time in ticks
+	u64 diff_ticks_slow = diff_ticks(start_time_slow, end_time_slow);
+	u64	num1_ticks = ticks_to_cycles(diff_ticks_slow);
+	u64 milliseconds_slow = ticks_to_millisecs(diff_ticks_slow);
+	("Execution took: %llu milliseconds (ms)\n\n", milliseconds_slow);
+	("cycles: %llu \n\n", num1_ticks);	
+ 	u64 start_time_slow = gettick();
+}
     NEXT;
   }
   
