@@ -142,6 +142,15 @@ int main(int argc, char **argv) {
 }
 
 // 15.72 fps 0.0001s or .0000729 cycles
+//all tests done with JIT ARM64 
+
+//Update main-call.c #141 
+// Execution took: 15578 miliseconds (ms)
+// cycles: 11356538676000
+// Execution took: 21906 miliseconds (ms)
+// cycles: 15969778800000
+// Execution took: 23489 miliseconds (ms)
+// cycles: 17123676660000
 
 //Update main-switch.c #121
 // Execution took: 13419 miliseconds (ms)
@@ -151,9 +160,14 @@ int main(int argc, char **argv) {
 // Execution took: 16777 miliseconds (ms)
 // cycles: 12230582664000
 
-//if (count % 10000000 == 0){	  
-//(11006551188000/10000000)/15098 = 72.90 cycles per dispatch
+//if (count % 10000000 == 0){ main-switch.c
+//(11006551188000/10000000)/15098 = 72.90 cycles per dispatch (lower is better)
 //(12230582664000/10000000)/16777 = 72.90 cycles per dispatch
+
+//if (count % 10000000 == 0){ main-call.c	  
+//(11356538676000/10000000)/15578 = 72.90 cycles per dispatch (lower is better
+//(17123676660000/10000000)/23489 = 72.90 cycles per dispatch
+
 
 /*
 minimal setup:
