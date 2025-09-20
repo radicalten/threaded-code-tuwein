@@ -72,6 +72,25 @@ start:
   next1(); next2(); next1(); next3(); next1();
   next4(); next1(); next5(); next1();
   loop(); goto start;
+  
+	while(1) {
+
+		// Call WPAD_ScanPads each loop, this reads the latest controller states
+		WPAD_ScanPads();
+
+		// WPAD_ButtonsDown tells us which buttons were pressed in this loop
+		// this is a "one shot" state which will not fire again until the button has been released
+		u32 pressed = WPAD_ButtonsDown(0);
+
+		// We return to the launcher application via exit
+		if ( pressed & WPAD_BUTTON_HOME ) exit(0);
+
+		// Wait for the next frame
+		VIDEO_WaitVSync();
+	}
+
+	return 0;
+}
 
 void next1()
 {
@@ -98,6 +117,7 @@ void next5()
   guard(5);
 }
 
+
 void loop()
 {
   static int count=100000000;
@@ -115,25 +135,6 @@ void loop()
   if (count<=0)
     exit(0);
   count--;
-}
-  
-	while(1) {
-
-		// Call WPAD_ScanPads each loop, this reads the latest controller states
-		WPAD_ScanPads();
-
-		// WPAD_ButtonsDown tells us which buttons were pressed in this loop
-		// this is a "one shot" state which will not fire again until the button has been released
-		u32 pressed = WPAD_ButtonsDown(0);
-
-		// We return to the launcher application via exit
-		if ( pressed & WPAD_BUTTON_HOME ) exit(0);
-
-		// Wait for the next frame
-		VIDEO_WaitVSync();
-	}
-
-	return 0;
 }
 
 // 15.72 fps 0.0001s or .0000729 cycles
