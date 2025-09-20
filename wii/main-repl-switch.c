@@ -165,7 +165,7 @@ if (count % 10000000 == 0){	  // checks every 10M loop iterations using moduluo 
 //(17123676660000/10000000)/23489 = 72.90 cycles per dispatch
 
 //either these results are truly identical... or there is something seriously wrong with my testing
-//main-repl-switch had one result that was different from 72.90--which just appears to be an artifact of the 729Mhz cpu 
+//main-repl-switch had one result that was different from 72.90 (70.33)--which just appears to be an artifact of the 729Mhz cpu 
 
 
 /*
