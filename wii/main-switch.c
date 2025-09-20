@@ -91,11 +91,6 @@ int main(int argc, char **argv) {
       NEXT;
     case 4:
       guard(4);
-      NEXT;
-    case 5:
-      if (count>0) {
-	count--;
-	ip=prog;
 	if (count % 10000 == 0){	  
 	u64 end_time_slow = gettick();   // Get end time in ticks
 	u64 diff_ticks_slow = diff_ticks(start_time_slow, end_time_slow);
@@ -104,6 +99,11 @@ int main(int argc, char **argv) {
 	printf("cycles: %f \n\n", milliseconds_slow*.000729); // cycles = measured user time * clock frequency in MHz / 1000	
 	u64 start_time_slow = gettick();
 	}
+      NEXT;
+    case 5:
+      if (count>0) {
+	count--;
+	ip=prog;
 	NEXT;
 	/* the rest is to get gcc to make a realistic switch statement */
       }
