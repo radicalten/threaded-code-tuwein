@@ -96,7 +96,7 @@ int main(int argc, char **argv) {
       if (count>0) {
 	count--;
 	ip=prog;
-	if (count == 1000 || 2000 || 3000 || 4000 || 5000 || 6000 || 7000 || 8000 || 9000 || 10000){	  
+	if (count % 10000 == 0){	  
 	u64 end_time_slow = gettick();   // Get end time in ticks
 	u64 diff_ticks_slow = diff_ticks(start_time_slow, end_time_slow);
 	u64 milliseconds_slow = ticks_to_millisecs(diff_ticks_slow);
