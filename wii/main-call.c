@@ -11,7 +11,7 @@ typedef void (*Inst)();
 
 Inst *ip;
 extern Inst prog[];
-u64 start_time_slow = gettick();
+u64 start_time_slow = 0;
 
 #define NEXT ((*ip++)())
 
