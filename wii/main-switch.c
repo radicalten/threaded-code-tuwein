@@ -89,11 +89,8 @@ int main(int argc, char **argv) {
     case 5:
       if (count>0) {
 	count--;
-	ip=prog;
-	if (count==10000000){	  
-	printf("looping"); // required else it doesn't clock() properly
-	}
-	if (count==1000000){	  
+	ip=prog;			
+	if (count==90000000){	  
 	end = clock();
 	cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
     printf("took %f seconds to execute (CPU time)\n", cpu_time_used); // cycles = measured user time * clock frequency in MHz / 1000
