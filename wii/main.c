@@ -74,8 +74,6 @@ int main(int argc, char **argv) {
     console_init(xfb, 20, 20, rmode->fbWidth, rmode->xfbHeight, rmode->fbWidth * VI_DISPLAY_PIX_SZ);
     
     // 4. Allocate and initialize the Graphics Processor (GX) command buffer (FIFO)
-    gp_fifo = mem_align(32, DEFAULT_FIFO_SIZE);
-    memset(gp_fifo, 0, DEFAULT_FIFO_SIZE);
     GX_Init(gp_fifo, DEFAULT_FIFO_SIZE);
 
     // 5. Setup a black background
