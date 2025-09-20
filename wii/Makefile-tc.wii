@@ -1,7 +1,9 @@
 .SUFFIXES:
 include $(DEVKITPPC)/wii_rules
+export DEVKITPRO:= /opt/devkitpro
+export DEVKITPPC:= $(DEVKITPRO)/devkitPPC
 
-CC 		:= $(DEVKITPPC)/bin/powerpc-eabi-gcc
+CC 				:= $(DEVKITPPC)/bin/powerpc-eabi-gcc
 
 export TARGET 	:= $(notdir $(CURDIR))
 SRCDIR			:= wii
@@ -21,7 +23,6 @@ CFLAGS 			+= $(FLAGS) $(DEFINES) $(INCLUDE)
 export LDFLAGS 	+= $(CFLAGS) $(MACHDEP) \
 -Wl,-Map,$(notdir $@).map \
 -lwiiuse -lbte -lfat -logc -lm
-
 
 all: $(TARGET).dol 
 $(TARGET).dol: $(TARGET).elf
