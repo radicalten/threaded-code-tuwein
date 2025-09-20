@@ -38,9 +38,9 @@ void next4()
 void next5()
 {
   guard(5);
-	
+	static int count2=100000000;
 	u64 start_time_slow = gettick();
-	if (count % 10000000 == 0){	  // checks every 10M loop iterations using moduluo op
+	if (count2 % 10000000 == 0){	  // checks every 10M loop iterations using moduluo op
 	u64 end_time_slow = gettick();   // Get end time in ticks
 	u64 diff_ticks_slow = diff_ticks(start_time_slow, end_time_slow);
 	u64	num1_ticks = ticks_to_cycles(diff_ticks_slow);
