@@ -61,8 +61,8 @@ int main(int argc, char **argv) {
     u64 end_time_slow = gettick();   // Get end time in ticks
 	
 	u64 diff_ticks_slow = diff_ticks(start_time_slow, end_time_slow);
-    u32 microseconds_slow = ticks_to_microseconds(diff_ticks_slow);
-    u32 milliseconds_slow = ticks_to_milliseconds(diff_ticks_slow);
+    u32 microseconds_slow = ticks_to_microsecs(diff_ticks_slow);
+    u32 milliseconds_slow = ticks_to_millisecs(diff_ticks_slow);
 
     printf("Execution took: %llu ticks\n", diff_ticks_slow);
     printf("Execution took: %lu microseconds (us)\n", microseconds_slow);
@@ -94,6 +94,7 @@ int main(int argc, char **argv) {
       if (count>0) {
 	count--;
 	ip=prog;
+	printf("Execution took: %lu milliseconds (ms)\n\n", milliseconds_slow);	  
 	NEXT;
 	/* the rest is to get gcc to make a realistic switch statement */
       }
