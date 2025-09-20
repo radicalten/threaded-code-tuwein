@@ -36,5 +36,5 @@ $(TARGET).dol: $(TARGET).elf
 %.o: %.c
 	$(CC) -c $< -o $@ $(CFLAGS)
 clean:
-	rm -f $(TARGET).elf $(TARGET).dol $(TARGET).map $(OBJECTS)
+	@rm -fr $(TARGET).elf $(TARGET).dol $(TARGET).map $(OBJECTS)
 .PHONY: test clean
